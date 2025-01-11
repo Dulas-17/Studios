@@ -38,7 +38,19 @@ p,nav,h1 {
   word-break: break-word;
 }
 
-        * {
+   ```
+@media (max-width: 480px) {
+}
+
+@media (max-width: 640px) and (orientation: portrait) {
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+```   
+
+
+  * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -650,6 +662,28 @@ document.addEventListener("DOMContentLoaded", () => {
     adjustResourceScaling();
     lazyLoadMedia();
 });
+
+
+
+
+window.addEventListener('resize', function() {
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  document.body.style.width = width + 'px';
+  document.body.style.height = height + 'px';
+});
+
+// Call the function on page load
+window.onload = function() {
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  document.body.style.width = width + 'px';
+  document.body.style.height = height + 'px';
+};
+
+
 
     </script>
 </body>
