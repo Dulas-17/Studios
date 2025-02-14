@@ -3,713 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upcoming studios</title>
+    <title>Camera App</title>
     <style>
-meta[name="viewport"]{
- content:'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,;
-}
-/* General reset */
-html {
-  font-size: 80%; /* Base font size, adjustable with device settings */
-}
-
-/* Use relative units for fonts */
-body {
-  font-family: Arial, sans-serif;
-  font-size: 1rem; /* Relative to root font size */
-  line-height: 1.5; /* Maintain spacing for readability */
-}
-
-/* Adapt layout to avoid overlap */
-.container {
-  max-width: 100%;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-h1, h2, h3, p {
-  margin: 0.5rem 0;
-}
-
-/* Prevent text overflow */
-p,h1 {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-}
-
-   ```
-@media (max-width: 480px) {
-}
-
-@media (max-width: 640px) and (orientation: portrait) {
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-}
-```   
-
-
-  * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial,italic;
-            background-image: url('Nel.png'); /* Replace with your image path */
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            color: #fff;
-        }
-
-        header {
-            position: relative;
-            text-align: center;
-            padding: 50px 20px 50px;
-            background: rgba(0, 0, 0, 0.6);
-        }
-
-        header h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-           color:gold;
-        }
-
-        header p {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-           color:gold;
-        }
-
-        header .cta-buttons {
             display: flex;
-            justify-content: center;
-            gap: 15px;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
         }
 
-        header .cta-buttons button {
-            padding: 10px 20px;
-            font-size: 1rem;
+        #camera-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px;
+            position: relative;
+        }
+
+        #video-element {
+            width: 100%;
+            border-radius: 10px;
+            background-color: black;
+        }
+
+        #shutter-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white;
+            border: 4px solid #333;
+            margin: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #shutter-button:active {
+            transform: scale(0.9);
+            background-color: #ddd;
+        }
+
+        #captured-image {
+            width: 100%;
+            max-width: 600px;
+            display: none;
+            border-radius: 10px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        #download-link {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            background: black;
-            color: gold;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        header .cta-buttons button:hover {
-            background: rgba(255, 255, 255, 1);
-            transform: scale(1.1);
-        }
-
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            z-index: 1000;
-        }
-
-        nav a {
             text-decoration: none;
-            color: gold;
-            font-size: 1rem;
-            font-weight: bold;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        nav a:hover {
-            background: white;
-        }
-
-        main {
-            padding: 50px 20px;
-            text-align: center;
-            background: linear-gradient(120deg, black, gold);
-            color: gold;
-            margin: 20px auto;
-            border-radius: 10px;
-            max-width: device-width;
-            width:device-width;
-        }
-
-        .audio-container, .video-container {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid rgba(355, 355, 355, 0.3);
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.8);
-            text-align: left;
-        }
-
-        .audio-container h4, .video-container h4 {
-            margin-bottom: 5px;
-            font-size: 1.2rem;
-        }
-
-        audio,
-video {
-  width: 100%;
-  margin-top: 10px;
-  border-radius: 5px;
-}
-
-        .video-container video {
-            max-width: 100%; /* Keeps video within container */
-            height: auto; /* Maintains aspect ratio */
-        }
-
-        .profile-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.8);
-            text-align: left;
-        }
-
-        .profile-item img {
-            width: 50px;
-            height: 50px;
-            margin-right: 15px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        .section {
             display: none;
         }
-
-        .section.active {
-            display: block;
-        }
-
-.loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 5px solid black;
-  border-top-color: white;
-  animation: spin 3s linear infinite;
-  z-index: 1000;
-}
-
-@keyframes spin {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-.loaded {
-  display: none;
-}
-
-audio::-webkit-media-controls-panel {
-background-image: linear-gradient(180deg, gold,black);
-background-size: 100% 100%;
-}
-
-audio::-webkit-media-controls-play-button {
-background-color: transparent;
-border: none;
-padding: 0;
-}
-
-audio::-webkit-media-controls-timeline {
-background-image: linear-gradient(120deg, white);
-background-size: 100% 100%;
-}
-
-audio::-webkit-media-controls-mute-button {
-background-color: transparent;
-border: none;
-padding: 0;
-}
-
-.search-bar {
-  margin-bottom: 15px;
-  width: 80%;
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 15px;
-  border:3px solid black ;
-  background: linear-gradient(180deg,gold,gold);
-  color: black;
-  outline: none;
-}
-
-#threads-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.thread {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.thread-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    padding-bottom: 5px;
-}
-
-.thread-header p {
-    margin: 0;
-    font-size: 14px;
-    color: #ffffff;
-}
-
-.thread-body {
-    font-size: 16px;
-    color: #ffffff;
-    line-height: 1.5;
-}
-
-/* Timestamp style */
-.timestamp {
-    font-size: 12px;
-    font-style: italic;
-    color: #dddddd;
-}
-
     </style>
-<base href="https://dulas-17.github.io/Studios/">
 </head>
 <body>
-   <div class="loader"></div>
-    <header>
-        <h1>Upcoming Studios</h1>
-        <p>Discover Music, Videos, and Profiles</p>
-        <div class="cta-buttons">
-            <button onclick="scrollToSection('about')">Learn More</button>
-            <button onclick="scrollToSection('music')">Discover Now</button>
-        </div>
-    </header>
+    <div id="camera-container">
+        <video id="video-element" autoplay playsinline></video>
+        <canvas id="canvas-element" style="display: none;"></canvas>
+        <img id="captured-image" alt="Captured image">
+    </div>
 
-    <nav>
-     <a href="#Updates" onclick="showSection('updates')">Updates</a>
-        <a href="#music" onclick="showSection('music')">Music</a>
-        <a href="#videos" onclick="showSection('videos')">Videos</a>
-        <a href="#profiles" onclick="showSection('profiles')">Profiles</a>
-        <a href="#about" onclick="showSection('about')">About</a>
-    </nav>
-
-<!---Updates Section--->
-<main id="updates" class="section active">
-
-     <h2>Updates</h2>
-            <div id="threads-container">
-
-              <!-- Thread 1 -->
-              <div class="thread">
-            <div class="thread-header">
-                <p><strong>Artist Name</strong></p>
-                <p class="timestamp">Posted on: 2024-11-23</p>
-            </div>
-            <div class="thread-body">
-                <p>Excited to announce a new single dropping this Friday! Stay tuned for "Golden Vibes."</p>
-            </div>
-        </div>
-
-        <!-- Thread 2 -->
-        <div class="thread">
-            <div class="thread-header">
-                <p><strong>Artist Name</strong></p>
-                <p class="timestamp">Posted on: 2024-11-20</p>
-            </div>
-            <div class="thread-body">
-                <p>Just wrapped up an amazing live session—thank you to everyone who joined the stream!</p>
-            </div>
-            </div>
-
-        <!-- Add more threads manually here -->
-            </div>
-</main>
-
-<!---music section--->
-    <main id="music" class="section ">
-        <h2>Music</h2>
-<div class="search-container">
-            <input type="text" class="search-bar" placeholder="Search Music..." onkeyup="filterItems('audio-container', this.value)">
-        </div>
-
-        <div class="audio-container">
-            <h4>Song Title 1</h4>
-            <p>Artist: John Doe</p>
-            <audio controls>
-                <source src="https://drive.google.com/uc?export=download&id=1488XUZ_7PCIM66FcKUcaAnhQtYaczU-o" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-
-        <div class="audio-container">
-            <h4>Song Title 2</h4>
-            <p>Artist: Jane Smith</p>
-            <audio controls>
-                <source src="2.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-    </main>
-
-<!---video section--->
-    <main id="videos" class="section">
-        <h2>Videos</h2>
-<div class="search-container">
-            <input type="text" class="search-bar" placeholder="Search Videos..." onkeyup="filterItems('video-container', this.value)">
-        </div>
-
-        <div class="video-container">
-            <h4>Video Title 1</h4>
-            <p>Description: A beautiful scenery.</p>
-            <video controls>
-                <source src="1.mp4" type="video/mp4">
-                Your browser does not support the video element.
-            </video>
-        </div>
-
-        <div class="video-container">
-            <h4>Video Title 2</h4>
-            <p>Description: An amazing performance.</p>
-            <video controls>
-                <source src="2.mp4" type="video/mp4">
-                Your browser does not support the video element.
-            </video>
-        </div>
-    </main>
-
-<!---Profile Section--->
-    <main id="profiles" class="section">
-        <h2>Profiles</h2>
-<div class="search-container">
-            <input type="text" class="search-bar" placeholder="Search Profiles..." onkeyup="filterItems('profile-item', this.value)">
-        </div>
-
-        <div class="profile-item">
-            <a href="gold.html" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
-                <img src="profile1.jpg" alt="Gold">
-                <div style="margin-left: 15px;">
-                    <p style="font-weight: bold; font-size: 1.1rem;">Gold Profile</p>
-                    <p style="font-size: 0.9rem;">Genre: none</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="profile-item">
-            <a href="silver.html" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
-                <img src="profile2.jpg" alt="silver">
-                <div style="margin-left: 15px;">
-                    <p style="font-weight: bold; font-size: 1.1rem;">Sliver Profile</p>
-                    <p style="font-size: 0.9rem;">Genre: None</p>
-                </div>
-            </a>
-        </div>
-    </main>
-
-<!---About Section--->
-    <main id="about" class="section">
-        <h2>About Us</h2>
-        <p>We are a platform dedicated to bringing you the latest in music, videos, and artist profiles.</p>
-    </main>
-
-    <footer>
-        &copy; 2024 Music & Video Platform. All Rights Reserved.
-    </footer>
+    <div class="controls">
+        <button id="shutter-button"></button>
+        <a id="download-link" download="captured-image.jpg">Download</a>
+    </div>
 
     <script>
-//SECTION MANAGEMENT 
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
+        const video = document.getElementById('video-element');
+        const canvas = document.getElementById('canvas-element');
+        const shutterButton = document.getElementById('shutter-button');
+        const capturedImage = document.getElementById('captured-image');
+        const downloadLink = document.getElementById('download-link');
+
+        // Access camera
+        async function initCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: "environment" } 
+                });
+                video.srcObject = stream;
+            } catch (error) {
+                alert('Error accessing camera: ' + error.message);
             }
         }
 
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.classList.remove('active'));
-            const activeSection = document.getElementById(sectionId);
-            if (activeSection) {
-                activeSection.classList.add('active');
-            }
+        // Take picture
+        function takePicture() {
+            const context = canvas.getContext('2d');
+            
+            // Set canvas dimensions to match video stream
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            // Draw current video frame on canvas
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Convert canvas to image
+            const imageData = canvas.toDataURL('image/jpeg');
+            capturedImage.src = imageData;
+            
+            // Show captured image and hide video
+            video.style.display = 'none';
+            capturedImage.style.display = 'block';
+            
+            // Show download link
+            downloadLink.href = imageData;
+            downloadLink.style.display = 'block';
         }
 
-//AUDIO AND VIDEO MANAGEMENT 
-// Get all audio and video elements
-const mediaElements = document.querySelectorAll('audio, video');
-
-// Add an event listener to each media element
-mediaElements.forEach((element) => {
-  element.addEventListener('play', () => {
-    // Pause all other media elements when this one starts playing
-    mediaElements.forEach((otherElement) => {
-      if (otherElement !== element) {
-        otherElement.pause();
-      }
-    });
-  });
-});
-
-//CONTROLSLIST
-document.addEventListener('DOMContentLoaded', () => {
-  const mediaElements = document.querySelectorAll('audio, video');
-  mediaElements.forEach((element) => {
-    element.setAttribute('controlsList', 'nodownload');
-  });
-});
-
-//AUTO VEDIO PLAY
-const videos = document.querySelectorAll('video');
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.play();
-    } else {
-      entry.target.pause();
-    }
-  });
-}, {
-  threshold: 0.8,
-});
-
-videos.forEach((video) => {
-  observer.observe(video);
-});
-
-//SECURITY 
-// Disable right-click context menu
-document.addEventListener('contextmenu', (event) => {
-    event.preventDefault();
-});
-
-// Detect DevTools opening
-(function() {
-    let devtools = false;
-    const element = new Image();
-    Object.defineProperty(element, 'id', {
-        get: function() {
-            devtools = true;
-            throw new Error('DevTools detected!');
-        }
-    });
-    setInterval(() => {
-        devtools = false;
-        console.log(element);
-        if (devtools) {
-            alert('Developer Tools are not allowed on this platform.');
-        }
-    }, 1000);
-})();
-
-// Disable F12 and other key combinations
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
-        event.preventDefault();
-        alert('Developer Tools are disabled.');
-    }
-});
-
-//LOADING
-// Wait for the page to finish loading
-document.addEventListener("DOMContentLoaded", () => {
-  // Get all audio and video elements on the page
-  const mediaElements = document.querySelectorAll("audio, video");
-
-  // Set the preload attribute to "auto" for each media element
-  mediaElements.forEach((element) => {
-    element.preload = "auto"; // Load media after page load
-  });
-});
-
-// Show loader when page is loading
-document.addEventListener('DOMContentLoaded', () => {
-  const loader = document.querySelector('.loader');
- 
-  // Hide loader and show main content when page has finished loading
-  loader.classList.add('loaded');
-  mainContent.style.display = 'block';
-});
-
-// Optional: Add event listener to detect when loader is fully hidden
-document.addEventListener('transitionend', (e) => {
-  if (e.target.classList.contains('loader')) {
-    // Remove loader from DOM after it's fully hidden
-    e.target.remove();
-  }
-});
-
-//SEARCH FUNCTION 
-// Filter Functionality
-        function filterItems(containerClass, query) {
-            const items = document.querySelectorAll(`.${containerClass}`);
-            query = query.toLowerCase();
-
-            items.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+        // Retake picture
+        function retakePicture() {
+            video.style.display = 'block';
+            capturedImage.style.display = 'none';
+            downloadLink.style.display = 'none';
         }
 
-//FONT 
-// Function to handle font scaling
-function adjustFontScaling() {
-  const rootElement = document.documentElement;
-  const defaultFontSize = 16; // Default font size in pixels
-  const currentFontSize = parseFloat(
-    window.getComputedStyle(rootElement).fontSize
-  );
-  
-  // Ensure layout doesn't break
-  if (currentFontSize > defaultFontSize) {
-    rootElement.style.fontSize = `${defaultFontSize}px`;
-  }
-}
+        // Event listeners
+        shutterButton.addEventListener('click', takePicture);
+        capturedImage.addEventListener('click', retakePicture);
 
-// Monitor for changes in the font size
-window.addEventListener("resize", adjustFontScaling);
-window.addEventListener("load", adjustFontScaling);
-
-//RAM
-// Check device memory and adjust resource scaling
-function adjustResourceScaling() {
-    const memory = navigator.deviceMemory || 1; // Default to 1 if unsupported
-
-    // Dynamic resource scaling based on memory
-    if (memory > 4) {
-        console.log("High-memory device detected. Enabling high-performance mode.");
-        document.body.classList.add('high-performance'); // Add class for high-res animations, resources
-    } else {
-        console.log("Low-memory device detected. Enabling optimized mode.");
-        document.body.classList.add('low-performance'); // Add class for optimized settings
-    }
-}
-
-//LAZY LOADING 
-// Lazy loading for images, audio, and video
-function lazyLoadMedia() {
-    const lazyMedia = document.querySelectorAll('img[data-src], audio[data-src], video[data-src]');
-
-    // Observer for lazy loading
-    const lazyObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const element = entry.target;
-
-                // Replace data-src with src
-                if (element.tagName === "IMG" || element.tagName === "VIDEO" || element.tagName === "AUDIO") {
-                    element.src = element.dataset.src;
-                }
-
-                // Load additional data if available
-                if (element.tagName === "VIDEO" || element.tagName === "AUDIO") {
-                    element.load();
-                }
-
-                // Stop observing the loaded element
-                observer.unobserve(element);
-            }
-        });
-    });
-
-    // Observe all lazy media
-    lazyMedia.forEach(media => lazyObserver.observe(media));
-}
-
-// Call the functions on DOMContentLoaded
-document.addEventListener("DOMContentLoaded", () => {
-    adjustResourceScaling();
-    lazyLoadMedia();
-});
-
-
-
-//TEMPORARY CACHE 
-// Function to set data with an expiration time
-function setDataWithExpiry(key, value, expiryTimeInHours = 1) {
-    const now = new Date();
-    const expiry = now.getTime() + expiryTimeInHours * 60 * 60 * 1000; // 1 hour in milliseconds
-    const data = {
-        value: value,
-        expiry: expiry
-    };
-    localStorage.setItem(key, JSON.stringify(data));
-}
-
-// Function to get data, check expiry, and delete if expired
-function getDataWithExpiry(key) {
-    const dataString = localStorage.getItem(key);
-    if (!dataString) {
-        return null; // Data doesn't exist
-    }
-
-    const data = JSON.parse(dataString);
-    const now = new Date();
-
-    // Check if data is expired
-    if (now.getTime() > data.expiry) {
-        localStorage.removeItem(key); // Remove expired data
-        return null; // Data is expired
-    }
-
-    return data.value; // Data is still valid
-}
-
-// Example usage
-setDataWithExpiry('exampleKey', 'exampleValue');
-
-// Retrieve data later
-const storedValue = getDataWithExpiry('exampleKey');
-if (storedValue) {
-    console.log('Data:', storedValue); // Valid data
-} else {
-    console.log('Data has expired or does not exist.');
-}
-
-
+        // Initialize camera when page loads
+        window.addEventListener('load', initCamera);
     </script>
 </body>
 </html>
